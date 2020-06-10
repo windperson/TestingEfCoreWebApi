@@ -5,7 +5,7 @@ using Items.Models;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 
-namespace Tests
+namespace InRamDatabaseTests
 {
     public abstract class ItemsControllerTest
     {

@@ -6,7 +6,7 @@ using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 
-namespace Tests
+namespace InRamDatabaseTests
 {
     #region SqliteInMemory
     public class SqliteInMemoryItemsControllerTest : ItemsControllerTest, IDisposable

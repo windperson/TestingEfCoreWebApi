@@ -2,7 +2,7 @@ using Items;
 using Items.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Tests
+namespace InRamDatabaseTests
 {
     #region SqliteItemsControllerTest
     public class SqliteItemsControllerTest : ItemsControllerTest
