@@ -1,0 +1,35 @@
+# ASP.NET Core
+# Build and test ASP.NET Core projects targeting .NET Core.
+# Add steps that run tests, create a NuGet package, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  buildConfiguration: 'Release'
+  sourceProject: 'src/ItemsWebApi/ItemsWebApi.csproj'
+  testProject: 'test/**/*Tests.csproj'
+
+steps:
+- task: DotNetCoreCLI@2
+  inputs:
+    command: build
+    projects: '$(sourceProject)'
+    arguments: '--configuration $(buildConfiguration)'
+  displayName: "Build source project"
+- task: DotNetCoreCLI@2
+  inputs:
+    command: test
+    projects: '$(testProject)'
+    arguments: '--configuration $(buildConfiguration)  /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$(Build.SourcesDirectory)/TestResults/Coverage/'
+    publishTestResults: true
+  displayName: "Run Test project"
+- task: PublishCodeCoverageResults@1
+  inputs:
+    codeCoverageTool: 'Cobertura'
+    summaryFileLocation: '$(Build.SourcesDirectory)/**/TestResults/Coverage/*.cobertura.xml'
+  displayName: "Publish code coverage report"
